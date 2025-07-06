@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class ResultsAppConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'Results_app'
+    name = 'Apps.Results_app'
