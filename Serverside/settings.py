@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'Apps.Feedback_app',
     'Apps.Results_app',
     'rest_framework',
+    'drf_yasg'
 ]
 
 MIDDLEWARE = [
