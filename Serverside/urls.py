@@ -35,9 +35,11 @@ schema_view = get_schema_view(
     public=True,
     permission_classes=(permissions.AllowAny,),
 )
+from Apps.Fee_app.urls import url_patterns as fee_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/user/',include(url_patterns)),
+    path('api/',include(url_patterns)),
+    path('api/',include(fee_urls)),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]

@@ -1,3 +1,5 @@
 import requests
-response= requests.delete('http://127.0.0.1:8000/api/user/delete/3',data={"auth_user":3})
+data={"username":"prasad","password":"123","role":"STUDENT"}
+response= requests.get('http://127.0.0.1:8000/api/users/6')
+
 print(response.json())
