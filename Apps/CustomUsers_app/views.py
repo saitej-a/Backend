@@ -10,7 +10,7 @@ User=get_user_model()
 class UserViewset(viewsets.ModelViewSet):
     queryset=User.objects.all()
     serializer_class = CustomUserSerializer
-    permission_classes = [IsTeacherOrAdmin]
+    # permission_classes = [IsTeacherOrAdmin]
 
     
 @api_view(['GET'])
