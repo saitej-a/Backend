@@ -21,7 +21,7 @@ load_dotenv(os.path.join(BASE_DIR,'.env'))
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY='django-insecure-58i8$ro%#3l-@se23jsi$z9el&407wht64@qyatvbt5x)3g!d3' # os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -46,12 +46,15 @@ INSTALLED_APPS = [
     'Apps.Feedback_app',
     'Apps.Results_app',
     'rest_framework',
+    'rest_framework_simplejwt',
+    'corsheaders',
     'drf_yasg'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -60,6 +63,24 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Serverside.urls'
+CORS_ALLOWED_ORIGINS=['http://localhost:8000',]
+CORS_ALLOW_ALL_ORIGINS=True
+CORS_ALLOW_CREDENTIALS=True
+
+REST_FRAMEWORK={
+  'DEFAULT_AUTHENTICATION_CLASSES':(
+    'rest_framework_simplejwt.authentication.JWTAuthentication',)
+  
+}
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
+
+
 
 TEMPLATES = [
     {
