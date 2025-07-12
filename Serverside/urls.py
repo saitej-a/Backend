@@ -38,6 +38,7 @@ schema_view = get_schema_view(
 from Apps.Fee_app.urls import url_patterns as fee_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
     path('api/',include(url_patterns)),
     path('api/',include(fee_urls)),
     path('api/',include(com_urls)),

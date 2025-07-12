@@ -24,9 +24,9 @@ load_dotenv(os.path.join(BASE_DIR,'.env'))
 SECRET_KEY='django-insecure-58i8$ro%#3l-@se23jsi$z9el&407wht64@qyatvbt5x)3g!d3' # os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -69,8 +69,9 @@ CORS_ALLOW_CREDENTIALS=True
 
 REST_FRAMEWORK={
   'DEFAULT_AUTHENTICATION_CLASSES':(
+    'rest_framework.authentication.SessionAuthentication',
     'rest_framework_simplejwt.authentication.JWTAuthentication',)
-  
+
 }
 from datetime import timedelta
 
@@ -146,8 +147,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
-
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # NOT static/
+#STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 

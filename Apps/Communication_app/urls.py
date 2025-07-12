@@ -1,8 +1,7 @@
 from django.urls import path,include
-from .views import MessageViewSet
-from rest_framework.routers import DefaultRouter
-router=DefaultRouter()
-router.register(r'message',MessageViewSet)
+from .views import listMessages, createMessage
+
 url_patterns=[
-path('',include(router.urls))
+path('messages/',listMessages),
+path('messages/',createMessage)
 ]
