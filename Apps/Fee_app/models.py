@@ -9,3 +9,12 @@ class FeePayment(models.Model):
     timestamp=models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return f'{self.student} - {self.amount} - {self.purpose[:20]}'
+class FeeReceipt(models.mdoel):
+    student_name=models.ForeignKey(CustomUser,on_delete=models.CASCADE)
+    receipt_number=models.CharField(max_length=20,unique=True)
+    issue_date=models.DateTimeField(auto_now_add=True)
+    receipt_purpose=models.CharField(max_length=20)
+    receipt_amount=models.DecimalField(max_digits=10,decimal_places=2)
+    
+    
+    
