@@ -15,3 +15,15 @@ class Message(models.Model):
     is_read=models.BooleanField(default=False)
     def __str__(self):
       return self.body
+
+# Announcements model
+class Announcement(models.Model):
+    title = models.CharField(max_length=255)
+    message = models.TextField()
+    created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.title
+
