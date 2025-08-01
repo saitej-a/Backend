@@ -6,10 +6,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes,api_view
 from .permissions import IsAdmin,IsParent,IsStudent,IsTeacher,IsTeacherOrAdmin
 import random
-import smtplib
+from django.core.mail import send_mail
 from .models import passwordTokens
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+from django.conf import settings
 User=get_user_model()
 class UserViewset(viewsets.ModelViewSet):
     queryset=User.objects.all()
@@ -44,20 +43,17 @@ def generateToken(request):
     except:
         return Response({'message':'User doesn\'t exists'},status=status.HTTP_404_NOT_FOUND)
     reset_obj=passwordTokens.objects.create(user=user,token=token)
-    deep_email = "deeptrics@gmail.com"
-    deep_password = "mzdmcsokkeantubr"
-    server = smtplib.SMTP("smtp.gmail.com", 587)
-    server.starttls()
-    server.login(deep_email, deep_password)
-    msg = MIMEMultipart()
-    msg["From"] = deep_email
-    msg["To"] = mail
-    msg["Subject"] = "Reset Email from DeepTrics"
-    body=f"To reset your password please visit {request.META.get('HTTP_ORIGIN')+'/api/password_reset/'+token+'/'}"
-    msg.attach(MIMEText(body, "plain"))
-    server.send_message(msg)
-    server.quit()
-    return Response({'message':'Successfully email sent check your mail...'},status=status.HTTP_200_OK)
+    reset_link=request.build_absolute_uri(f'/api/password_reset/{reset_obj.token}/')
+    #send email
+    subject = 'Password Reset Request'
+    message = f'Your password reset token is: {reset_link}'
+    msg='Successfully sent the email'
+    sts=status.HTTP_200_OK
+    try:
+        send_mail(subject, message,settings.EMAIL_HOST_USER, [mail], fail_silently=False)
+    except Exception as e:
+        return Response({'message': f'Error sending email: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    return Response({'message':message},status=sts)
 
 @api_view(['POST'])
 def passwordReset(request,pk):

@@ -24,7 +24,7 @@ load_dotenv(os.path.join(BASE_DIR,'.env'))
 SECRET_KEY='django-insecure-58i8$ro%#3l-@se23jsi$z9el&407wht64@qyatvbt5x)3g!d3' # os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -63,7 +63,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Serverside.urls'
-CORS_ALLOWED_ORIGINS=['http://localhost:8000',]
+# CORS_ALLOWED_ORIGINS=['http://localhost:8000',]
 CORS_ALLOW_ALL_ORIGINS=True
 CORS_ALLOW_CREDENTIALS=True
 
@@ -132,6 +132,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL= 'CustomUsers_app.CustomUser'
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "deeptrics@gmail.com"
+EMAIL_HOST_PASSWORD = "mzdmcsokkeantubr"  # os.getenv('EMAIL_HOST_PASSWORD')
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
