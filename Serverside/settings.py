@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,12 +46,12 @@ INSTALLED_APPS = [
     'Apps.Fee_app',
     'Apps.Feedback_app',
     'Apps.Results_app',
-    'Apps.Academics_app',
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
     'drf_yasg'
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
